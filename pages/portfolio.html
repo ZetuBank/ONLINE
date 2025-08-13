@@ -1,0 +1,224 @@
+<div class="section" style="padding-top: 120px;">
+    <div class="container">
+        <div class="section-header">
+            <h2>Our Portfolio</h2>
+            <p>A showcase of our finest work and creative solutions across various industries and platforms.</p>
+        </div>
+        
+        <!-- Portfolio Filters -->
+        <div style="text-align: center; margin-bottom: 50px;">
+            <div style="display: inline-flex; flex-wrap: wrap; gap: 10px; background: var(--surface-color); padding: 8px; border-radius: 50px; border: 1px solid var(--border-color);">
+                <button class="portfolio-filter active" data-filter="all" style="padding: 10px 20px; border: none; background: var(--primary-color); color: white; border-radius: 25px; cursor: pointer; font-weight: 500; transition: all 0.3s ease;">All</button>
+                <button class="portfolio-filter" data-filter="web" style="padding: 10px 20px; border: none; background: transparent; color: var(--text-secondary); border-radius: 25px; cursor: pointer; font-weight: 500; transition: all 0.3s ease;">Web Apps</button>
+                <button class="portfolio-filter" data-filter="mobile" style="padding: 10px 20px; border: none; background: transparent; color: var(--text-secondary); border-radius: 25px; cursor: pointer; font-weight: 500; transition: all 0.3s ease;">Mobile</button>
+                <button class="portfolio-filter" data-filter="design" style="padding: 10px 20px; border: none; background: transparent; color: var(--text-secondary); border-radius: 25px; cursor: pointer; font-weight: 500; transition: all 0.3s ease;">Design</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" style="padding-top: 0;">
+    <div class="container">
+        <!-- Portfolio Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;">
+            
+            <!-- Portfolio Item 1 -->
+            <div class="portfolio-item web card" style="overflow: hidden; padding: 0; position: relative; height: 400px;">
+                <div style="height: 250px; background: var(--gradient-primary); display: flex; align-items: center; justify-content: center; position: relative;">
+                    <i class="fas fa-laptop-code" style="font-size: 80px; color: rgba(255,255,255,0.3);"></i>
+                    <div style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 20px; color: white; font-size: 0.8rem; font-weight: 600;">Web App</div>
+                </div>
+                <div style="padding: 30px;">
+                    <h3 style="margin-bottom: 10px; color: var(--text-primary);">E-Commerce Platform</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 15px;">Modern e-commerce solution with advanced features, seamless checkout, and responsive design.</p>
+                    <div style="display: flex; gap: 8px; margin-bottom: 15px;">
+                        <span style="background: var(--surface-color); padding: 3px 8px; border-radius: 12px; font-size: 0.7rem; color: var(--text-muted);">React</span>
+                        <span style="background: var(--surface-color); padding: 3px 8px; border-radius: 12px; font-size: 0.7rem; color: var(--text-muted);">Node.js</span>
+                        <span style="background: var(--surface-color); padding: 3px 8px; border-radius: 12px; font-size: 0.7rem; color: var(--text-muted);">MongoDB</span>
+                    </div>
+                    <a href="#" style="color: var(--primary-color); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 5px;">
+                        View Project <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Portfolio Item 2 -->
+            <div class="portfolio-item mobile design card" style="overflow: hidden; padding: 0; position: relative; height: 400px;">
+                <div style="height: 250px; background: var(--gradient-accent); display: flex; align-items: center; justify-content: center; position: relative;">
+                    <i class="fas fa-mobile-alt" style="font-size: 80px; color: rgba(255,255,255,0.3);"></i>
+                    <div style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 20px; color: white; font-size: 0.8rem; font-weight: 600;">Mobile</div>
+                </div>
+                <div style="padding: 30px;">
+                    <h3 style="margin-bottom: 10px; color: var(--text-primary);">Fitness Tracking App</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 15px;">Mobile-first progressive web app for fitness enthusiasts with real-time tracking and analytics.</p>
+                    <div style="display: flex; gap: 8px; margin-bottom: 15px;">
+                        <span style="background: var(--surface-color); padding: 3px 8px; border-radius: 12px; font-size: 0.7rem; color: var(--text-muted);">PWA</span>
+                        <span style="background: var(--surface-color); padding: 3px 8px; border-radius: 12px; font-size: 0.7rem; color: var(--text-muted);">Chart.js</span>
+                        <span style="background: var(--surface-color); padding: 3px 8px; border-radius: 12px; font-size: 0.7rem; color: var(--text-muted);">Firebase</span>
+                    </div>
+                    <a href="#" style="color: var(--primary-color); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 5px;">
+                        View Project <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Portfolio Item 3 -->
+            <div class="portfolio-item web card" style="overflow: hidden; padding: 0; position: relative; height: 400px;">
+                <div style="height: 250px; background: var(--secondary-color); display: flex; align-items: center; justify-content: center; position: relative;">
+                    <i class="fas fa-chart-line" style="font-size: 80px; color: rgba(255,255,255,0.3);"></i>
+                    <div style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 20px; color: white; font-size: 0.8rem; font-weight: 600;">Dashboard</div>
+                </div>
+                <div style="padding: 30px;">
+                    <h3 style="margin-bottom: 10px; color: var(--text-primary);">Analytics Dashboard</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 15px;">Comprehensive business intelligence dashboard with real-time data visualization and reporting.</p>
+                    <div style="display: flex; gap: 8px; margin-bottom: 15px;">
+                        <span style="background: var(--surface-color); padding: 3px 8px; border-radius: 12px; font-size: 0.7rem; color: var(--text-muted);">D3.js</span>
+                        <span style="background: var(--surface-color); padding: 3px 8px; border-radius: 12px; font-size: 0.7rem; color: var(--text-muted);">Vue.js</span>
+                        <span style="background: var(--surface-color); padding: 3px 8px; border-radius: 12px; font-size: 0.7rem; color: var(--text-muted);">Python</span>
+                    </div>
+                    <a href="#" style="color: var(--primary-color); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 5px;">
+                        View Project <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Portfolio Item 4 -->
+            <div class="portfolio-item design card" style="overflow: hidden; padding: 0; position: relative; height: 400px;">
+                <div style="height: 250px; background: linear-gradient(135deg, #667eea, #764ba2, #f093fb); display: flex; align-items: center; justify-content: center; position: relative;">
+                    <i class="fas fa-paint-brush" style="font-size: 80px; color: rgba(255,255,255,0.3);"></i>
+                    <div style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 20px; color: white; font-size: 0.8rem; font-weight: 600;">Design</div>
+                </div>
+                <div style="padding: 30px;">
+                    <h3 style="margin-bottom: 10px; color: var(--text-primary);">Brand Identity System</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 15px;">Complete brand redesign including logo, color palette, typography, and brand guidelines.</p>
+                    <div style="display: flex; gap: 8px; margin-bottom: 15px;">
+                        <span style="background: var(--surface-color); padding: 3px 8px; border-radius: 12px; font-size: 0.7rem; color: var(--text-muted);">Illustrator</span>
+                        <span style="background: var(--surface-color); padding: 3px 8px; border-radius: 12px; font-size: 0.7rem; color: var(--text-muted);">Figma</span>
+                        <span style="background: var(--surface-color); padding: 3px 8px; border-radius: 12px; font-size: 0.7rem; color: var(--text-muted);">InDesign</span>
+                    </div>
+                    <a href="#" style="color: var(--primary-color); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 5px;">
+                        View Project <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Portfolio Item 5 -->
+            <div class="portfolio-item web design card" style="overflow: hidden; padding: 0; position: relative; height: 400px;">
+                <div style="height: 250px; background: linear-gradient(135deg, #4facfe, #00f2fe); display: flex; align-items: center; justify-content: center; position: relative;">
+                    <i class="fas fa-globe" style="font-size: 80px; color: rgba(255,255,255,0.3);"></i>
+                    <div style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 20px; color: white; font-size: 0.8rem; font-weight: 600;">Website</div>
+                </div>
+                <div style="padding: 30px;">
+                    <h3 style="margin-bottom: 10px; color: var(--text-primary);">Corporate Website</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 15px;">Professional corporate website with content management system and multi-language support.</p>
+                    <div style="display: flex; gap: 8px; margin-bottom: 15px;">
+                        <span style="background: var(--surface-color); padding: 3px 8px; border-radius: 12px; font-size: 0.7rem; color: var(--text-muted);">WordPress</span>
+                        <span style="background: var(--surface-color); padding: 3px 8px; border-radius: 12px; font-size: 0.7rem; color: var(--text-muted);">PHP</span>
+                        <span style="background: var(--surface-color); padding: 3px 8px; border-radius: 12px; font-size: 0.7rem; color: var(--text-muted);">MySQL</span>
+                    </div>
+                    <a href="#" style="color: var(--primary-color); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 5px;">
+                        View Project <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Portfolio Item 6 -->
+            <div class="portfolio-item mobile card" style="overflow: hidden; padding: 0; position: relative; height: 400px;">
+                <div style="height: 250px; background: linear-gradient(135deg, #fa709a, #fee140); display: flex; align-items: center; justify-content: center; position: relative;">
+                    <i class="fas fa-shopping-cart" style="font-size: 80px; color: rgba(255,255,255,0.3);"></i>
+                    <div style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 20px; color: white; font-size: 0.8rem; font-weight: 600;">Mobile App</div>
+                </div>
+                <div style="padding: 30px;">
+                    <h3 style="margin-bottom: 10px; color: var(--text-primary);">Shopping Assistant</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 15px;">AI-powered mobile shopping assistant with barcode scanning and price comparison features.</p>
+                    <div style="display: flex; gap: 8px; margin-bottom: 15px;">
+                        <span style="background: var(--surface-color); padding: 3px 8px; border-radius: 12px; font-size: 0.7rem; color: var(--text-muted);">React Native</span>
+                        <span style="background: var(--surface-color); padding: 3px 8px; border-radius: 12px; font-size: 0.7rem; color: var(--text-muted);">TensorFlow</span>
+                        <span style="background: var(--surface-color); padding: 3px 8px; border-radius: 12px; font-size: 0.7rem; color: var(--text-muted);">AWS</span>
+                    </div>
+                    <a href="#" style="color: var(--primary-color); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 5px;">
+                        View Project <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" style="background-color: var(--surface-color);">
+    <div class="container">
+        <div class="section-header">
+            <h2>Client Testimonials</h2>
+            <p>What our clients say about working with us</p>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px;">
+            <div class="card" style="position: relative; padding-top: 50px;">
+                <div style="position: absolute; top: 20px; left: 30px; width: 40px; height: 40px; background: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-quote-left" style="color: white; font-size: 16px;"></i>
+                </div>
+                <p style="font-style: italic; margin-bottom: 20px; color: var(--text-secondary);">
+                    "The KISS team delivered exactly what we needed - a beautiful, functional website that our customers love. Their attention to detail and commitment to excellence is outstanding."
+                </p>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="width: 50px; height: 50px; background: var(--gradient-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-user" style="color: white; font-size: 20px;"></i>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 5px;">Sarah Johnson</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">CEO, TechStart Inc.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" style="position: relative; padding-top: 50px;">
+                <div style="position: absolute; top: 20px; left: 30px; width: 40px; height: 40px; background: var(--secondary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-quote-left" style="color: white; font-size: 16px;"></i>
+                </div>
+                <p style="font-style: italic; margin-bottom: 20px; color: var(--text-secondary);">
+                    "Working with KISS was a pleasure from start to finish. They took our complex requirements and delivered a solution that exceeded our expectations."
+                </p>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="width: 50px; height: 50px; background: var(--gradient-accent); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-user" style="color: white; font-size: 20px;"></i>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 5px;">Michael Chen</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Product Manager, InnovateCorp</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" style="position: relative; padding-top: 50px;">
+                <div style="position: absolute; top: 20px; left: 30px; width: 40px; height: 40px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-quote-left" style="color: white; font-size: 16px;"></i>
+                </div>
+                <p style="font-style: italic; margin-bottom: 20px; color: var(--text-secondary);">
+                    "The mobile app they created for us has been a game-changer for our business. It's intuitive, fast, and our users absolutely love it."
+                </p>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="width: 50px; height: 50px; background: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-user" style="color: white; font-size: 20px;"></i>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 5px;">Emily Rodriguez</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Founder, FitLife Solutions</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="container text-center">
+        <div class="section-header">
+            <h2>Want to See More?</h2>
+            <p>Have a project in mind? Let's discuss how we can bring your vision to life.</p>
+        </div>
+        <a href="#" onclick="kissApp.loadPage('contact')" class="cta-button" style="background: var(--gradient-primary); color: white; text-decoration: none;">
+            <span>Start Your Project</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+</div>
