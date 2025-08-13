@@ -1,1352 +1,307 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MED-A HOME PAGE</title>
-  <style>
-    /* Basic Reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: Georgia, serif;
-      font-weight: bold;
-      text-align: center;
-      background-color: #111;
-      /* Star Pattern Background */
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><text x="0" y="30" style="font-size:40px;fill:rgba(40,40,40,0.6);">★</text></svg>');
-      color: #fff;
-      margin: 0;
-    }
-
-    /* Header Styles */
-    .header-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background-color: #181818;
-      padding: 10px 15px;
-    }
-
-    .header-logo {
-      display: flex;
-      align-items: center;
-    }
-
-    .header-logo img {
-      width: 70px;
-      height: 30px;
-    }
-
-    .langganan-btn {
-      background-color: #333;
-      color: #FF5733; /* Reddish-orange button text */
-      padding: 5px 15px;
-      border-radius: 5px;
-      border: 1px solid #FF5733; /* Reddish-orange button border */
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    /* Horizontal Scrollable Menu */
-    .header-menu {
-      display: flex;
-      overflow-x: auto;
-      background-color: #181818;
-      padding: 10px 0;
-    }
-
-    .menu-item {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 6px 12px;
-      margin-right: 5px;
-      color: black;
-      border-radius: 20px;
-      cursor: pointer;
-      white-space: nowrap;
-      font-weight: bold;
-      font-size: 12px;
-    }
-
-    .menu-item:nth-child(1) {
-      background: linear-gradient(to right, maroon, white);
-      color: white;
-    }
-
-    .menu-item:nth-child(2) {
-      background: linear-gradient(to right, white, yellow);
-    }
-
-    .menu-item:nth-child(3) {
-      background: linear-gradient(to right, yellow, maroon);
-    }
-
-    .menu-item:nth-child(4) {
-      background: linear-gradient(to right, maroon, white);
-      color: white;
-    }
-
-    .menu-item:nth-child(5) {
-      background: linear-gradient(to right, white, yellow);
-    }
-
-    .menu-item:nth-child(6) {
-      background: linear-gradient(to right, yellow, maroon);
-    }
-
-    .menu-item:nth-child(7) {
-      background: linear-gradient(to right, maroon, white);
-      color: white;
-    }
-
-    .menu-item.active {
-      background-color: white;
-      color: black;
-    }
-
-    .menu-item img {
-      width: 16px;
-      margin-right: 5px;
-    }
-
-    /* Hide scrollbar for Chrome, Safari and Opera */
-    .header-menu::-webkit-scrollbar {
-      display: none;
-    }
-
-    /* Hide scrollbar for IE, Edge and Firefox */
-    .header-menu {
-      -ms-overflow-style: none; /* IE and Edge */
-      scrollbar-width: none; /* Firefox */
-    }
-
-    /* Align center Item */
-    .align-center {
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-    }
-
-    /* Carousel Styles */
-    .carousel-container {
-      position: relative;
-      width: 100%;
-      height: 300px;
-      overflow-x: hidden;
-      border: 2px solid #FF5733;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(255, 87, 51, 0.5);
-    }
-
-    .carousel-slide {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-size: cover;
-      background-position: center;
-    }
-
-    .carousel-slide.active {
-      opacity: 1;
-    }
-
-    .carousel-title {
-      position: absolute;
-      bottom: 50px;
-      left: 20px;
-      font-size: 24px;
-      font-weight: bold;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 5px 10px;
-      border-radius: 5px;
-      z-index: 20;
-      color: white;
-    }
-
-    /* Play Buttons */
-    .play-btn {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 40px;
-      height: 40px;
-      background-color: red;
-      color: white;
-      border-radius: 50%;
-      font-size: 20px;
-      cursor: pointer;
-      border: 3px solid transparent;
-      display: none;
-      z-index: 20;
-    }
-
-    /* Dots Navigation */
-    .carousel-dots {
-      position: absolute;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 5px;
-      z-index: 20;
-    }
-
-    .dot {
-      width: 14px;
-      height: 14px;
-      background-color: gray;
-      border-radius: 50%;
-      cursor: pointer;
-    }
-
-    .dot.active {
-      background-color: yellow;
-    }
-
-    /* Sections Below */
-    .section {
-      margin: 20px;
-    }
-
-    .section-title {
-      font-size: 20px;
-      margin-bottom: 10px;
-      color: #FFD700;
-      text-shadow: 1px 1px 2px #000, 0 0 4px #FFD700;
-    }
-
-    .images-container {
-      display: flex;
-      overflow-x: scroll;
-      gap: 10px;
-      padding-bottom: 10px;
-      border: 2px solid #FF5733;
-      border-radius: 10px;
-      box-shadow: 0 0 5px rgba(255, 87, 51, 0.5);
-    }
-
-    /* Wrapper for image + skeleton */
-    .image-skeleton-wrapper {
-      position: relative;
-      flex-shrink: 0;
-      border-radius: 5px;
-      overflow: hidden;
-      cursor: pointer;
-      width: 120px;
-      height: 180px;
-    }
-
-    .image-item {
-      width: 100%;
-      height: 100%;
-      object-fit: fill;
-      border-radius: 5px;
-      display: block;
-    }
-
-    /* Skeleton overlay for each image */
-    .image-skeleton {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, #333 25%, #444 50%, #333 75%);
-      background-size: 200% auto;
-      animation: horizontal-gradient 2s linear infinite;
-      border-radius: 5px;
-      z-index: 10;
-    }
-
-    /* Discover Section */
-    .discover-section {
-      margin: 20px;
-      text-align: center;
-    }
-
-    .discover-section .section-title {
-      font-size: 20px;
-      margin-bottom: 15px;
-      color: #FFD700;
-      text-shadow: 2px 2px 4px #000;
-    }
-
-    .discover-icons {
-      display: flex;
-      overflow-x: auto;
-      gap: 15px;
-      padding: 10px;
-      scrollbar-width: none;
-    }
-
-    .discover-icons::-webkit-scrollbar {
-      display: none;
-    }
-
-    .icon-item {
-      flex-shrink: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .icon-item a {
-      text-decoration: none;
-    }
-
-    .icon-item img {
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      object-fit: fill;
-      border: 2px solid #FFD700;
-      background: radial-gradient(circle, #FFA500 40%, #FFD700 100%);
-    }
-
-    .icon-item p {
-      margin-top: 8px;
-      font-size: 14px;
-      color: #FFD700;
-      text-shadow: 1px 1px 2px #000;
-    }
-
-    /* Carousel image wrapper */
-    .carousel-slide .image-skeleton-wrapper {
-      width: 100%;
-      height: 100%;
-      border-radius: 10px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .carousel-slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: fill;
-      display: block;
-      border-radius: 10px;
-    }
-
-    /* Horizontal Gradient Animation */
-    @keyframes horizontal-gradient {
-      0% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
-    }
-  </style>
-</head>
-<body>
-
-<!-- Actual Content -->
-<div class="content">
-  <!-- Header -->
-  <header>
-    <div class="header-top" style="display: flex; align-items: center; justify-content: space-between;">
-      <div class="header-logo">
-        <div class="image-skeleton-wrapper" style="width: 70px; height: 30px; position: relative; overflow: hidden; border-radius: 3px;">
-          <div class="image-skeleton" style="position: absolute; top:0; left:0; width: 100%; height: 100%; background: linear-gradient(90deg, #333 25%, #444 50%, #333 75%); background-size: 200% auto; animation: horizontal-gradient 2s linear infinite; z-index: 10; border-radius: 3px;"></div>
-          <img src="https://res.cloudinary.com/dtjjgiitl/image/upload/q_auto:good,f_auto,fl_progressive/v1751736184/pkivxjk1hycsybn4nljv.jpg" alt="MED-A" width="70" height="30" style="display: block;" loading="lazy" decoding="async" />
-        </div>
-      </div>
-      <div class="align-center" style="display: flex; align-items: center;">
-        <button class="langganan-btn" style="display: flex; align-items: center;">
-          <div class="image-skeleton-wrapper" style="width: 20px; height: 14px; position: relative; overflow: hidden; border-radius: 2px; margin-right: 3px;">
-            <div class="image-skeleton" style="position: absolute; top:0; left:0; width: 100%; height: 100%; background: linear-gradient(90deg, #333 25%, #444 50%, #333 75%); background-size: 200% auto; animation: horizontal-gradient 2s linear infinite; z-index: 10; border-radius: 2px;"></div>
-            <img src="https://res.cloudinary.com/dtjjgiitl/image/upload/q_auto:good,f_auto,fl_progressive/v1751736524/u8lpnluqkmbwcarhgxq9.jpg" alt="Empowering Icon" width="20" height="14" style="display: block;" loading="lazy" decoding="async" />
-          </div>
-          EMPOWERING MEDICAL LEARNING
-        </button>
-      </div>
-      <div class="header-logo">
-        <div class="image-skeleton-wrapper" style="width: 70px; height: 30px; position: relative; overflow: hidden; border-radius: 3px;">
-          <div class="image-skeleton" style="position: absolute; top:0; left:0; width: 100%; height: 100%; background: linear-gradient(90deg, #333 25%, #444 50%, #333 75%); background-size: 200% auto; animation: horizontal-gradient 2s linear infinite; z-index: 10; border-radius: 3px;"></div>
-          <img src="https://res.cloudinary.com/dtjjgiitl/image/upload/q_auto:good,f_auto,fl_progressive/v1751736184/pkivxjk1hycsybn4nljv.jpg" alt="MED-A" width="70" height="30" style="display: block;" loading="lazy" decoding="async" />
-        </div>
-      </div>
-    </div>
-  </header>
-</div>
-
-<style>
-  @keyframes horizontal-gradient {
-    0% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-</style>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const wrappers = document.querySelectorAll('.image-skeleton-wrapper');
-
-    wrappers.forEach(wrapper => {
-      const img = wrapper.querySelector('img');
-      const skeleton = wrapper.querySelector('.image-skeleton');
-
-      if (img.complete && img.naturalWidth !== 0) {
-        skeleton.style.display = 'none';
-      } else {
-        skeleton.style.display = 'block';
-        img.addEventListener('load', () => {
-          skeleton.style.display = 'none';
-        });
-        img.addEventListener('error', () => {
-          skeleton.style.background = '#555'; // Optional error indicator
-        });
-      }
-    });
-  });
-</script>
-
-
-    <div class="header-menu">
-      <a href="go:portal" class="menu-item active">Student's Portal</a>
-      <a href="go:eLearn" class="menu-item">eLearning</a>
-      <a href="go:Jiunge" class="menu-item">Jiunge</a>
-      <a href="go:HELB" class="menu-item">HELB portal</a>
-      <a href="go:Admin" class="menu-item">Admission portal</a>
-    </div>
-  </header>
-
-  <!-- Carousel Section -->
-  <div class="carousel-container">
-    <div class="carousel-slide active">
-      <div class="image-skeleton-wrapper">
-        <div class="image-skeleton"></div>
-        <img src="https://res.cloudinary.com/dtjjgiitl/image/upload/q_auto:good,f_auto,fl_progressive/v1751923529/ef4dz5wnhpmdgrwwsl2y.jpg" alt="" />
-      </div>
-      <div class="carousel-title">Leadership meets dedication in healthcare education!</div>
-      <div class="play-btn">▶</div>
-    </div>
-    <div class="carousel-slide">
-      <div class="image-skeleton-wrapper">
-        <div class="image-skeleton"></div>
-        <img src="https://res.cloudinary.com/dtjjgiitl/image/upload/q_auto:good,f_auto,fl_progressive/v1751923573/enbqwzt32v5n21mhx19d.jpg" alt="" />
-      </div>
-      <div class="carousel-title">Great journeys begin with dedication and perseverance!</div>
-      <div class="play-btn">▶</div>
-    </div>
-    <div class="carousel-slide">
-      <div class="image-skeleton-wrapper">
-        <div class="image-skeleton"></div>
-        <img src="https://res.cloudinary.com/dtjjgiitl/image/upload/q_auto:good,f_auto,fl_progressive/v1751923601/frk4rky5rxnmh2wea40r.jpg" alt="" />
-      </div>
-      <div class="carousel-title">Compassion and care beyond hospital walls!</div>
-      <div class="play-btn">▶</div>
-    </div>
-    <div class="carousel-slide">
-      <div class="image-skeleton-wrapper">
-        <div class="image-skeleton"></div>
-        <img src="https://res.cloudinary.com/dtjjgiitl/image/upload/q_auto:good,f_auto,fl_progressive/v1751923626/gcehljouesbnqccwzy7q.jpg" alt="" />
-      </div>
-      <div class="carousel-title">MED-A transforms books into a digital library at your fingertips!</div>
-      <div class="play-btn">▶</div>
-    </div>
-    <div class="carousel-slide">
-      <div class="image-skeleton-wrapper">
-        <div class="image-skeleton"></div>
-        <img src="https://res.cloudinary.com/dtjjgiitl/image/upload/q_auto:good,f_auto,fl_progressive/v1751923649/xvzhmrxrtpog5haq2cx8.jpg" alt="" />
-      </div>
-      <div class="carousel-title">A place where Medical Dreams take shape!</div>
-      <div class="play-btn">▶</div>
-    </div>
-    <div class="carousel-slide">
-      <div class="image-skeleton-wrapper">
-        <div class="image-skeleton"></div>
-        <img src="https://res.cloudinary.com/dtjjgiitl/image/upload/q_auto:good,f_auto,fl_progressive/v1751923674/ig3pd4kwvrfqnzpkxbfn.jpg" alt="" />
-      </div>
-      <div class="carousel-title">Celebrating unity, leadership, and bright futures!</div>
-      <div class="play-btn">▶</div>
-    </div>
-
-    <div class="carousel-dots">
-      <span class="dot active" onclick="goToSlide(0)"></span>
-      <span class="dot" onclick="goToSlide(1)"></span>
-      <span class="dot" onclick="goToSlide(2)"></span>
-      <span class="dot" onclick="goToSlide(3)"></span>
-      <span class="dot" onclick="goToSlide(4)"></span>
-      <span class="dot" onclick="goToSlide(5)"></span>
-    </div>
-  </div>
-
-  <!-- Discover Section -->
-<div class="discover-section">
-  <h2 class="section-title">🚀DISCOVER🌟</h2>
-  <div class="discover-icons">
-    <div class="icon-item">
-      <a href="go:papers">
-        <div class="image-skeleton-wrapper" style="width:70px; height:70px; border-radius:50%; overflow:hidden; position:relative;">
-          <div class="image-skeleton" style="border-radius:50%; position:absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(90deg, #333 25%, #444 50%, #333 75%); background-size: 200% auto; animation: horizontal-gradient 2s linear infinite; z-index:10;"></div>
-          <img src="https://res.cloudinary.com/dtjjgiitl/image/upload/q_auto:good,f_auto,fl_progressive/v1751736880/yuix4a9gbapfravrgasm.jpg" alt="✨" width="70" height="70" style="border-radius:50%; display:block;" loading="lazy" decoding="async" />
-        </div>
-        <p>PAPERS</p>
-      </a>
-    </div>
-    <div class="icon-item">
-      <a href="go:Books">
-        <div class="image-skeleton-wrapper" style="width:70px; height:70px; border-radius:50%; overflow:hidden; position:relative;">
-          <div class="image-skeleton" style="border-radius:50%; position:absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(90deg, #333 25%, #444 50%, #333 75%); background-size: 200% auto; animation: horizontal-gradient 2s linear infinite; z-index:10;"></div>
-          <img src="https://res.cloudinary.com/dtjjgiitl/image/upload/q_auto:good,f_auto,fl_progressive/v1751737049/oj3bcm47ylyqzaqb8kph.jpg" alt="✨" width="70" height="70" style="border-radius:50%; display:block;" loading="lazy" decoding="async" />
-        </div>
-        <p>BOOKS📚</p>
-      </a>
-    </div>
-    <div class="icon-item">
-      <a href="go:notes">
-        <div class="image-skeleton-wrapper" style="width:70px; height:70px; border-radius:50%; overflow:hidden; position:relative;">
-          <div class="image-skeleton" style="border-radius:50%; position:absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(90deg, #333 25%, #444 50%, #333 75%); background-size: 200% auto; animation: horizontal-gradient 2s linear infinite; z-index:10;"></div>
-          <img src="https://res.cloudinary.com/dtjjgiitl/image/upload/q_auto:good,f_auto,fl_progressive/v1751737236/ulhe9t3e0cx1liyv3rkd.jpg" alt="✨" width="70" height="70" style="border-radius:50%; display:block;" loading="lazy" decoding="async" />
-        </div>
-        <p>NOTES</p>
-      </a>
-    </div>
-    <div class="icon-item">
-      <a href="go:3D">
-        <div class="image-skeleton-wrapper" style="width:70px; height:70px; border-radius:50%; overflow:hidden; position:relative;">
-          <div class="image-skeleton" style="border-radius:50%; position:absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(90deg, #333 25%, #444 50%, #333 75%); background-size: 200% auto; animation: horizontal-gradient 2s linear infinite; z-index:10;"></div>
-          <img src="https://res.cloudinary.com/dtjjgiitl/image/upload/q_auto:good,f_auto,fl_progressive/v1751737361/tzqvbp5wkh7tnr77ec2m.jpg" alt="✨" width="70" height="70" style="border-radius:50%; display:block;" loading="lazy" decoding="async" />
-        </div>
-        <p>3D VIEW</p>
-      </a>
-    </div>
-    <div class="icon-item">
-      <a href="go:sssp">
-        <div class="image-skeleton-wrapper" style="width:70px; height:70px; border-radius:50%; overflow:hidden; position:relative;">
-          <div class="image-skeleton" style="border-radius:50%; position:absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(90deg, #333 25%, #444 50%, #333 75%); background-size: 200% auto; animation: horizontal-gradient 2s linear infinite; z-index:10;"></div>
-          <img src="https://res.cloudinary.com/dtjjgiitl/image/upload/q_auto:good,f_auto,fl_progressive/v1751737293/dhsgnopjn3l6ux9aldnd.jpg" alt="✨" width="70" height="70" style="border-radius:50%; display:block;" loading="lazy" decoding="async" />
-        </div>
-        <p>SUPPORT</p>
-      </a>
-    </div>
-  </div>
-</div>
-
-<style>
-  @keyframes horizontal-gradient {
-    0% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-</style>
-
-<script>
-  // Remove skeleton overlay individually when each image loads
-  document.addEventListener('DOMContentLoaded', () => {
-    const wrappers = document.querySelectorAll('.image-skeleton-wrapper');
-
-    wrappers.forEach(wrapper => {
-      const img = wrapper.querySelector('img');
-      const skeleton = wrapper.querySelector('.image-skeleton');
-
-      if (img.complete && img.naturalWidth !== 0) {
-        skeleton.style.display = 'none';
-      } else {
-        skeleton.style.display = 'block';
-        img.addEventListener('load', () => {
-          skeleton.style.display = 'none';
-        });
-        img.addEventListener('error', () => {
-          skeleton.style.background = '#555'; // Optional: indicate error
-        });
-      }
-    });
-  });
-</script>
-
-    <!-- Sections Below -->
-  <div class="section">
-    <h2 class="section-title">⚡ Neuroanatomy 🧠</h2>
-    <div class="images-container">
-      <div class="image-skeleton-wrapper">
-        <div class="image-skeleton"></div>
-        <img src="https://cdn.glitch.global/052ec4f9-fd41-4b8d-8a2c-2c4febfa72f6/structure%20of%20the%20Nervous%20System.png?v=1739862474117" class="image-item" onclick="openSection('nerve.s')" />
-      </div>
-      <div class="image-skeleton-wrapper">
-        <div class="image-skeleton"></div>
-        <img src="https://cdn.glitch.global/052ec4f9-fd41-4b8d-8a2c-2c4febfa72f6/vascular%20Supply.png?v=1739862511418" class="image-item" onclick="openSection('Vascular')" />
-      </div>
-      <div class="image-skeleton-wrapper">
-        <div class="image-skeleton"></div>
-        <img src="https://cdn.glitch.global/052ec4f9-fd41-4b8d-8a2c-2c4febfa72f6/Cranial%20nerves.png?v=1739862529241" class="image-item" onclick="openSection('Cranial')" />
-      </div>
-      <div class="image-skeleton-wrapper">
-        <div class="image-skeleton"></div>
-        <img src="https://cdn.glitch.global/052ec4f9-fd41-4b8d-8a2c-2c4febfa72f6/spinal%20cord.png?v=1739862549682" class="image-item" onclick="openSection('Spinal')" />
-      </div>
-      <div class="image-skeleton-wrapper">
-        <div class="image-skeleton"></div>
-        <img src="https://cdn.glitch.global/052ec4f9-fd41-4b8d-8a2c-2c4febfa72f6/cerebrum.png?v=1739862566572" class="image-item" onclick="openSection('Cereb')" />
-      </div>
-      <div class="image-skeleton-wrapper">
-        <div class="image-skeleton"></div>
-        <img src="https://cdn.glitch.global/052ec4f9-fd41-4b8d-8a2c-2c4febfa72f6/Basal%20Ganglia.png?v=1739862596635" class="image-item" onclick="openSection('Basal')" />
-      </div>
-      <div class="image-skeleton-wrapper">
-        <div class="image-skeleton"></div>
-        <img src="https://cdn.glitch.global/052ec4f9-fd41-4b8d-8a2c-2c4febfa72f6/diencephalon.png?v=1739862611502" class="image-item" onclick="openSection('Dience')" />
-      </div>
-      <div class="image-skeleton-wrapper">
-        <div class="image-skeleton"></div>
-        <img src="https://cdn.glitch.global/052ec4f9-fd41-4b8d-8a2c-2c4febfa72f6/cerebellum.png?v=1739862645973" class="image-item" onclick="openSection('Cerebe')" />
-      </div>
-      <div class="image-skeleton-wrapper">
-        <div class="image-skeleton"></div>
-        <img src="https://cdn.glitch.global/052ec4f9-fd41-4b8d-8a2c-2c4febfa72f6/Brain%20Stem.png?v=1739862676526" class="image-item" onclick="openSection('Brain')" />
-      </div>
-      <div class="image-skeleton-wrapper">
-        <div class="image-skeleton"></div>
-        <img src="https://cdn.glitch.global/052ec4f9-fd41-4b8d-8a2c-2c4febfa72f6/subarachnoid%20spaces.png?v=1739862662473" class="image-item" onclick="openSection('vent')" />
-      </div>
-    </div>
-  </div>
-
-  <div class="section">
-    <h2 class="section-title">🧑‍⚕️ Head Anatomy 🧠</h2>
-    <div class="images-container">
-      <div class="image-skeleton-wrapper">
-        <div class="image-skeleton"></div>
-        <img src="https://cdn.glitch.global/052ec4f9-fd41-4b8d-8a2c-2c4febfa72f6/skull%20the.png?v=1741531713703" class="image-item" onclick="openSection('Skull')" />
-      </div>
-      <div class="image-skeleton-wrapper">
-        <div class="image-skeleton"></div>
-        <img src="https://cdn.glitch.global/052ec4f9-fd41-4b8d-8a2c-2c4febfa72f6/eye%20Anatomy.png?v=1739870267026" class="image-item" onclick="openSection('eye')" />
-      </div>
-      <div class="image-skeleton-wrapper">
-        <div class="image-skeleton"></div>
-        <img src="https://cdn.glitch.global/052ec4f9-fd41-4b8d-8a2c-2c4febfa72f6/orbit..png?v=1739872409312" class="image-item" onclick="openSection('orbit')" />
-      </div>
-      <div class="image-skeleton-wrapper">
-        <div class="image-skeleton"></div>
-        <img src="https://cdn.glitch.global/052ec4f9-fd41-4b8d-8a2c-2c4febfa72f6/face%20%26%20scalp.png?v=1739870293047" class="image-item" onclick="openSection('face')" />
-      </div>
-      <div class="image-skeleton-wrapper">
-        <div class="image-skeleton"></div>
-        <img src="https://cdn.glitch.global/052ec4f9-fd41-4b8d-8a2c-2c4febfa72f6/oral%20Cavity.png?v=1739870309776" class="image-item" onclick="openSection('oral')" />
-      </div>
-      <div class="image-skeleton-wrapper">
-        <div class="image-skeleton"></div>
-        <img src="https://cdn.glitch.global/052ec4f9-fd41-4b8d-8a2c-2c4febfa72f6/ear%20anatomy.png?v=1739870324127" class="image-item" onclick="openSection('ear')" />
-      </div>
-      <div class="image-skeleton-wrapper">
-        <div class="image-skeleton"></div>
-        <img src="https://cdn.glitch.global/052ec4f9-fd41-4b8d-8a2c-2c4febfa72f6/paranasal%20Sinuses.png?v=1739870337137" class="image-item" onclick="openSection('paran')" />
-      </div>
-      <div class="image-skeleton-wrapper">
-        <div class="image-skeleton"></div>
-        <img src="https://cdn.glitch.global/052ec4f9-fd41-4b8d-8a2c-2c4febfa72f6/nose%20%26%20nasal%20cavity.png?v=1739870355376" class="image-item" onclick="openSection('nose')" />
-      </div>
-      <div class="image-skeleton-wrapper">
-        <div class="image-skeleton"></div>
-        <img src="https://cdn.glitch.global/052ec4f9-fd41-4b8d-8a2c-2c4febfa72f6/intracranial%20Region.png?v=1739870366111" class="image-item" onclick="openSection('intra')" />
-      </div>
-    </div>
-  </div>
-</div>
-
-<a id="animatedButton" href="go:more" class="meda-button">More Anatomy Videos</a>
-
-<style>
-  .meda-button {
-    display: inline-block;
-    padding: 12px 28px;
-    font-size: 17px;
-    font-weight: bold;
-    color: #fff;
-    background: linear-gradient(135deg, maroon, #FFD700, black);
-    border-radius: 50px;
-    text-decoration: none;
-    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.6);
-    transition: all 0.3s ease-in-out;
-    position: relative;
-    overflow: hidden;
-    border: 2px solid #fff;
-    animation: glowPulse 3s ease-in-out infinite;
-  }
-
-  @keyframes glowPulse {
-    0% {
-      box-shadow: 0 0 8px maroon, 0 0 12px #FFD700;
-    }
-    50% {
-      box-shadow: 0 0 20px #FFD700, 0 0 30px maroon;
-    }
-    100% {
-      box-shadow: 0 0 8px maroon, 0 0 12px #FFD700;
-    }
-  }
-
-  .meda-button:hover {
-    transform: scale(1.05);
-    background: linear-gradient(135deg, #800000, #ffcc00, #000);
-  }
-</style>
-
-<script>
-  let currentSlide = 0;
-  const slides = document.querySelectorAll(".carousel-slide");
-  const dots = document.querySelectorAll(".dot");
-
-  function goToSlide(index) {
-    slides.forEach((slide, i) => {
-      slide.classList.toggle("active", i === index);
-      dots[i].classList.toggle("active", i === index);
-    });
-    currentSlide = index;
-  }
-
-  function nextSlide() {
-    currentSlide = (currentSlide + 1) % slides.length;
-    goToSlide(currentSlide);
-  }
-
-  setInterval(nextSlide, 3000);
-
-  function openSection(sectionId) {
-    window.location.href = "go:" + sectionId;
-  }
-</script>
-
-<script>
-  // Remove skeleton overlay individually when each image loads
-  document.addEventListener('DOMContentLoaded', () => {
-    const wrappers = document.querySelectorAll('.image-skeleton-wrapper');
-
-    wrappers.forEach(wrapper => {
-      const img = wrapper.querySelector('img');
-      const skeleton = wrapper.querySelector('.image-skeleton');
-
-      if (img.complete && img.naturalWidth !== 0) {
-        // Image already loaded successfully
-        skeleton.style.display = 'none';
-      } else {
-        // Show skeleton until image loads
-        skeleton.style.display = 'block';
-        img.addEventListener('load', () => {
-          skeleton.style.display = 'none';
-        });
-        img.addEventListener('error', () => {
-          // Optionally keep skeleton or replace with error placeholder
-          skeleton.style.background = '#555';
-        });
-      }
-    });
-  });
-</script>
-
-<!-- Your existing scripts for caching, chat, analytics, etc. remain unchanged -->
-
-<script>
-  // Create footer container
-  var footer = document.createElement("div");
-  footer.style.backgroundColor = "black";
-  footer.style.color = "#FFD700";
-  footer.style.padding = "30px 20px";
-  footer.style.fontFamily = "Segoe UI, sans-serif";
-  footer.style.display = "flex";
-  footer.style.flexDirection = "column";
-  footer.style.alignItems = "center";
-  footer.style.borderTop = "3px solid maroon";
-  footer.style.textAlign = "center";
-
-  // App description
-  var description = document.createElement("p");
-  description.innerHTML = `
-    <span style="color: maroon; font-weight: bold;">MED-A</span> is your trusted companion for 
-    <span style="color: yellow;">medical mastery</span>, offering 
-    <span style="color: #ff6666;">past exam papers</span>, 
-    <span style="color: #66ccff;">anatomy videos</span>, 
-    <span style="color: #99ff99;">notes</span>, 
-    <span style="color: #ffcc66;">books</span>, and 
-    <span style="color: #ffffff;">interactive 3D views</span> to power your learning.
-  `;
-  description.style.maxWidth = "800px";
-  description.style.lineHeight = "1.6";
-  description.style.marginBottom = "25px";
-  description.style.fontSize = "15px";
-  description.style.color = "#fff";
-
-  // Create wrapper div for logo with skeleton overlay
-  var logoWrapper = document.createElement("div");
-  logoWrapper.style.position = "relative";
-  logoWrapper.style.width = "70px";
-  logoWrapper.style.height = "70px";
-  logoWrapper.style.borderRadius = "50%";
-  logoWrapper.style.overflow = "hidden";
-  logoWrapper.style.marginBottom = "15px";
-
-  // Skeleton overlay div
-  var skeleton = document.createElement("div");
-  skeleton.style.position = "absolute";
-  skeleton.style.top = "0";
-  skeleton.style.left = "0";
-  skeleton.style.width = "100%";
-  skeleton.style.height = "100%";
-  skeleton.style.background = "linear-gradient(90deg, #333 25%, #444 50%, #333 75%)";
-  skeleton.style.backgroundSize = "200% auto";
-  skeleton.style.animation = "horizontal-gradient 2s linear infinite";
-  skeleton.style.borderRadius = "4px";
-  skeleton.style.zIndex = "10";
-
-  // Developer logo with glowing effect
-  var logo = document.createElement("img");
-  logo.src = "https://res.cloudinary.com/dtjjgiitl/image/upload/q_auto:good,f_auto,fl_progressive/v1752925448/kgjmajuht3uqaqzpxbwg.jpg";
-  logo.alt = "DF";
-  logo.style.width = "70px";
-  logo.style.height = "70px";
-  logo.style.borderRadius = "50%";
-  logo.style.objectFit = "cover";
-  logo.style.filter = "drop-shadow(0 0 8px #ff6600) drop-shadow(0 0 20px #ff6600)";
-  logo.style.transition = "transform 0.3s ease, filter 0.3s ease";
-  logo.style.cursor = "pointer";
-  logo.style.display = "block";
-  logo.style.position = "relative";
-  logo.style.zIndex = "20";
-
-  // Show glowing effect on hover
-  logo.onmouseover = function () {
-    logo.style.transform = "scale(1.1)";
-    logo.style.filter = "drop-shadow(0 0 14px #ff6600) drop-shadow(0 0 25px #ff6600)";
-  };
-  logo.onmouseout = function () {
-    logo.style.transform = "scale(1)";
-    logo.style.filter = "drop-shadow(0 0 8px #ff6600) drop-shadow(0 0 20px #ff6600)";
-  };
-
-  // When logo loads, hide skeleton overlay
-  logo.onload = function () {
-    skeleton.style.display = "none";
-  };
-
-  // Append logo and skeleton to wrapper
-  logoWrapper.appendChild(skeleton);
-  logoWrapper.appendChild(logo);
-
-  // Copyright
-  var copyright = document.createElement("p");
-  copyright.innerHTML = `<span style="color:#888;">© 2025</span> | <strong>MED-A</strong> <span style="color:#ccc;">All Rights Reserved</span>`;
-  copyright.style.margin = "0";
-  copyright.style.fontSize = "13px";
-
-  // Append elements to footer
-  footer.appendChild(description);
-  footer.appendChild(logoWrapper);
-  footer.appendChild(copyright);
-
-  // Append footer to body
-  document.body.appendChild(footer);
-</script>
-
-<style>
-  @keyframes horizontal-gradient {
-    0% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-</style>
-
-<script>
-  // service-worker.js
-  const CACHE_NAME = 'my-app-cache-v1';
-  const urlsToCache = [
-    '/',
-    '/index.html',
-    '/styles.css',
-    '/script.js',
-    '/images/placeholder.png', // Add placeholder image
-  ];
-  self.addEventListener('install', (event) => {
-    event.waitUntil(
-      caches.open(CACHE_NAME)
-        .then((cache) => {
-          console.log('Opened cache');
-          return cache.addAll(urlsToCache);
-        })
-    );
-  });
-  self.addEventListener('fetch', (event) => {
-    event.respondWith(
-      caches.match(event.request)
-        .then((response) => {
-          return response || fetch(event.request);
-        })
-    );
-  });
-</script>
-
-<script>
-  // DOMContentLoaded ensures the script runs after the page is fully loaded
-  document.addEventListener('DOMContentLoaded', () => {
-    // Intercept all images and set their source to a cached or network resource
-    const imgElements = document.querySelectorAll('img');
-
-    imgElements.forEach(imgElement => {
-      const imageUrl = imgElement.src;
-
-      // If there's no image URL, skip this image
-      if (!imageUrl) {
-        console.warn('Image source is empty, skipping.');
-        return;
-      }
-
-      // Function to load image, whether from cache or the network
-      const loadImage = async () => {
-        const CACHE_NAME = 'my-app-cache-v1';
-
-        try {
-          // Attempt to retrieve the image from the cache
-          const cache = await caches.open(CACHE_NAME);
-          let cachedResponse = await cache.match(imageUrl);
-
-          if (cachedResponse) {
-            // If found in cache, set the image to the cached resource
-            const imageBlob = await cachedResponse.blob();
-            const imageURL = URL.createObjectURL(imageBlob);
-            imgElement.src = imageURL;
-            console.log('Image loaded from cache:', imageUrl);
-          } else {
-            // If not found in cache, fetch it from the network
-            try {
-              const networkResponse = await fetch(imageUrl);
-
-              // Check if the network request succeeded
-              if (!networkResponse.ok) {
-                throw new Error(`Network response was not ok: ${networkResponse.status}`);
-              }
-
-              // Clone the network response to store one in the cache
-              const networkResponseClone = networkResponse.clone();
-
-              // Put the network response in the cache
-              cache.put(imageUrl, networkResponseClone);
-
-              // Set the image to the fetched resource
-              const imageBlob = await networkResponse.blob();
-              const imageURL = URL.createObjectURL(imageBlob);
-              imgElement.src = imageURL;
-              console.log('Image loaded from network and cached:', imageUrl);
-            } catch (networkError) {
-              // If the network request fails, log an error and use a placeholder image
-              console.error('Failed to load image from network:', imageUrl, networkError);
-              imgElement.src = '/images/placeholder.png';
-            }
-          }
-        } catch (error) {
-          // Log any errors and use a placeholder image
-          console.error('Failed to process image:', imageUrl, error);
-          imgElement.src = '/images/placeholder.png';
-        }
-      };
-
-      // Execute the loadImage function for the current image
-      loadImage();
-    });
-  });
-</script>
-
-
-<!--Add the following script at the bottom of the web page (before </body></html>)-->
-<script type="text/javascript">function add_chatapi(){var hccid=81982190;var nt=document.createElement("script");nt.async=true;nt.src="https://mylivechat.com/chatapi.aspx?hccid="+hccid;var ct=document.getElementsByTagName("script")[0];ct.parentNode.insertBefore(nt,ct);}
-add_chatapi();</script>
-
-
-
-
-<style>
-  * {
-    -webkit-tap-highlight-color: transparent; /* Removes tap highlight effect on touch */
-    -webkit-user-select: none; /* Prevents text/image selection */
-    user-select: none;
-  }
-
-  a, button, img {
-    outline: none; /* Removes any focus outline */
-  }
-</style>
-
-
-
-
-
-
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "qrlzl0j3in");
-</script>
-
-
-<script>
-        // Network tracking: Check if data is working by fetching Cloudflare's trace endpoint.
-        function checkInternetConnection(callback) {
-            if (!navigator.onLine) {
-                callback(false);
-                return;
-            }
-            fetch("https://www.cloudflare.com/cdn-cgi/trace", { mode: "no-cors" })
-                .then(() => callback(true))
-                .catch(() => callback(false));
-        }
-
-        // When a good connection and all images are loaded, show the actual content.
-        function showContent() {
-            document.querySelector(".skeleton-loader").style.display = "none";
-            document.querySelector(".content").style.display = "block";
-        }
-
-        // Initialize the loading screen: check connection and ensure images are loaded.
-        function initLoadingScreen() {
-            setTimeout(function () {
-                checkInternetConnection(function(isConnected) {
-                    if (isConnected) {
-                        // Check that all images in .content have loaded.
-                        let images = document.querySelectorAll(".content img");
-                        let totalImages = images.length;
-                        let loadedImages = 0;
-                        if(totalImages === 0) {
-                            showContent();
-                            return;
-                        }
-                        images.forEach(img => {
-                            if(img.complete) {
-                                loadedImages++;
-                            } else {
-                                img.onload = function() {
-                                    loadedImages++;
-                                    if(loadedImages === totalImages) {
-                                        showContent();
-                                    }
-                                }
-                            }
-                        });
-                        // In case all images are already loaded.
-                        if(loadedImages === totalImages) {
-                            showContent();
-                        }
-                    } else {
-                        document.getElementById("loadingText").innerHTML = "";
-                        
-                    }
-                });
-            }, 2000);
-        }
-
-        // Retry mechanism: update text and attempt to recheck connection.
-        function retryConnection() {
-            document.getElementById("loadingText").innerHTML = "Retrying...";
-            document.getElementById("retryButton").style.display = "none";
-            setTimeout(function(){
-                checkInternetConnection(function(isConnected) {
-                    if (isConnected) {
-                        initLoadingScreen(); // Call initLoadingScreen instead of showContent
-                    } else {
-                        document.getElementById("loadingText").innerHTML = "";
-                        document.getElementById("retryButton").style.display = "block";
-                    }
-                });
-            }, 2000);
-        }
-
-        // Start the loading process once the window has loaded.
-        window.onload = initLoadingScreen;
-    </script>
-
-
-
-
-
-<script>
-(function () {
-  if (localStorage.getItem("device_id")) return;
-
-  function generateYearOptions(start, end) {
-    let opts = "";
-    for (let y = start; y <= end; y++) opts += `<option value="${y}">${y}</option>`;
-    return opts;
-  }
-
-  const modal = document.createElement("div");
-  modal.innerHTML = `
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MED-A Chat Support</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Quicksand:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
-      #admissionModalOverlay {
-        position: fixed;
-        top: 0; left: 0;
-        width: 100vw; height: 100vh;
-        background: rgba(0,0,0,0.92);
-        display: flex; justify-content: center; align-items: center;
-        z-index: 9999;
-      }
-      #admissionModal {
-        background: #18171c;
-        border-radius: 28px;
-        box-shadow: 0 0 40px 0 rgba(255,69,0,0.15);
-        border: 2px solid orangered;
-        max-width: 370px;
-        width: 92vw;
-        height: 480px;
-        display: flex;
-        flex-direction: column;
-        padding: 0;
-        font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
-        color: #fff;
-        position: relative;
-        text-align: left;
+      body {
+        background: #181818;
+        font-family: "Quicksand", sans-serif;
+        color: white;
         overflow: hidden;
       }
-      #admissionModalInner {
-        flex: 1 1 auto;
-        overflow-y: auto;
-        padding: 0 24px 10px 24px;
-        margin-bottom: 0;
-      }
-      #admissionModal h2 {
-        color: orangered;
-        font-size: 1.45rem;
-        text-align: center;
-        margin: 22px 0 6px 0;
-        font-weight: 600;
-        letter-spacing: 0.01em;
-      }
-      #admissionModal .subtext {
-        color: #ffa366;
-        font-size: 1.01rem;
-        text-align: center;
-        margin-bottom: 10px;
-        margin-top: 0;
-      }
-      #admissionModal label {
-        display: block;
-        margin-top: 14px;
-        margin-bottom: 6px;
-        font-size: 1rem;
-        color: #fff;
-        font-weight: 500;
-      }
-      #admissionModal input,
-      #admissionModal select {
-        width: 100%;
-        padding: 12px 14px;
-        background: #24232b;
-        border: 1.5px solid #ff4500;
-        border-radius: 8px;
-        font-size: 1rem;
-        color: #fff;
-        margin-bottom: 0;
-        outline: none;
-        box-sizing: border-box;
-        margin-top: 0;
-      }
-      #admissionModal input:focus,
-      #admissionModal select:focus {
-        border-color: #ffa500;
-      }
-      #admissionModal .name-fields {
+      #loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
         display: flex;
-        gap: 8px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: radial-gradient(circle, #232323 70%, #111 100%);
+        z-index: 9999;
+        overflow: hidden;
       }
-      #admissionModal .name-fields input {
-        flex: 1;
-        min-width: 0;
-        text-transform: uppercase; /* CSS: display in uppercase */
-        letter-spacing: 1px;
+      .loader-outer {
+        position: relative;
+        width: 110px;
+        height: 110px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
-      #admissionModal button {
-        width: 100%;
-        margin-top: 18px;
-        padding: 13px 0;
-        border: none;
-        border-radius: 10px;
-        font-size: 1.1rem;
-        font-weight: bold;
-        cursor: pointer;
-        background: linear-gradient(90deg, #ff8300 0%, #ff4500 100%);
-        color: #fff;
-        transition: background 0.2s;
-        box-shadow: 0 2px 8px 0 rgba(255,69,0,0.08);
+      .loader-ring {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 7px solid transparent;
+        border-top: 7px solid #ffd600;
+        border-right: 7px solid #ff2d2d;
+        border-bottom: 7px solid #ffb300;
+        border-left: 7px solid #ff3b3b;
+        animation: spin 1.1s linear infinite;
+        box-shadow: 0 0 30px #ffd60099, 0 0 20px #ff2d2d55;
       }
-      #admissionModal button:hover {
-        background: linear-gradient(90deg, #ffb300 0%, #ff4500 100%);
+      @keyframes spin {
+        100% {
+          transform: rotate(360deg);
+        }
       }
-      #admissionModal .error-message {
-        color: #ff6b6b;
-        font-size: 0.98rem;
-        margin-top: 10px;
-        margin-bottom: -5px;
+
+      .med-icon {
+        position: relative;
+        z-index: 2;
+        width: 54px;
+        height: 54px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #181818;
+        border-radius: 50%;
+        box-shadow: 0 0 14px #ffd60066;
+      }
+      /* Simple cross/medical symbol */
+      .med-icon svg {
+        display: block;
+        margin: auto;
+      }
+      /* Sparkling stars */
+      .star {
+        position: absolute;
+        background: radial-gradient(circle, #fff 60%, #ffd600 100%);
+        border-radius: 50%;
+        opacity: 0.8;
+        pointer-events: none;
+        animation: sparkle 2s infinite linear;
+      }
+      .star1 {
+        width: 12px;
+        height: 12px;
+        top: 10px;
+        left: 85px;
+        animation-delay: 0s;
+      }
+      .star2 {
+        width: 8px;
+        height: 8px;
+        top: 85px;
+        left: 20px;
+        animation-delay: 0.7s;
+      }
+      .star3 {
+        width: 10px;
+        height: 10px;
+        top: 60px;
+        left: 95px;
+        animation-delay: 1.2s;
+      }
+      .star4 {
+        width: 7px;
+        height: 7px;
+        top: 20px;
+        left: 40px;
+        animation-delay: 1.6s;
+      }
+      .star5 {
+        width: 9px;
+        height: 9px;
+        top: 50px;
+        left: 10px;
+        animation-delay: 0.4s;
+      }
+      @keyframes sparkle {
+        0%,
+        100% {
+          opacity: 0.8;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.5);
+        }
+      }
+      .pulse {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: radial-gradient(circle, #ffd600 60%, #ff2d2d 100%);
+        margin: 22px auto 0 auto;
+        animation: pulse-glow 1.2s infinite;
+        box-shadow: 0 0 18px #ffd60088, 0 0 30px #ff2d2d44;
+      }
+      @keyframes pulse-glow {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        70% {
+          transform: scale(1.3);
+          opacity: 0.6;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      .typing-container {
+        margin-top: 30px;
+        font-size: 1.25rem;
+        color: #ffd600;
+        text-shadow: 0 0 8px #ff2d2d, 0 0 2px #fff;
+        font-family: "Orbitron", sans-serif;
+        letter-spacing: 1.2px;
         text-align: center;
+      }
+      .fade-out {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.6s ease-out;
+      }
+      .chat-card {
         display: none;
+        padding: 3rem;
+        max-width: 500px;
+        background: linear-gradient(135deg, #232323 80%, #ffd60022 100%);
+        border-radius: 20px;
+        margin: 10vh auto;
+        text-align: center;
+        box-shadow: 0 0 25px #ff2d2d55, 0 0 10px #ffd60044;
+        color: #fff;
+        animation: fadeIn 1s ease-out;
       }
-      #admissionModal .powered-by {
-        margin: 0 0 18px 0;
+      .chat-card h1 {
+        color: #ffd600;
+        margin-bottom: 1rem;
+        text-shadow: 0 0 8px #ff2d2d;
+      }
+      .chat-card p {
         font-size: 1rem;
-        text-align: center;
-        color: #ff4500;
-        letter-spacing: 0.01em;
-        font-weight: 500;
+        color: #ffe6b3;
       }
-      #admissionModal .powered-by span {
-        color: #ffd700;
-        font-weight: bold;
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
-      #admissionModal .top-emoji {
-        text-align: center;
-        font-size: 1.3rem;
-        margin-top: 18px;
-        margin-bottom: 0;
-      }
-      #admissionModalInner::-webkit-scrollbar {
-        width: 6px;
-        background: transparent;
-      }
-      #admissionModalInner::-webkit-scrollbar-thumb {
-        background: #ff8300;
-        border-radius: 4px;
+      a,
+      button,
+      img {
+        outline: none;
       }
     </style>
-    <div id="admissionModalOverlay">
-      <form id="admissionModal" autocomplete="off" onsubmit="return false;">
-        <div class="top-emoji">🎉 Welcome to Med-A 🎉</div>
-        <h2>Tell us a bit about yourself!</h2>
-        <div class="subtext">
-          We’ll use this info to share app news, updates, and cool tips with you.
+  </head>
+  <body>
+    <!-- Loader -->
+    <div id="loader">
+      <div class="loader-outer">
+        <div class="loader-ring"></div>
+        <div class="star star1"></div>
+        <div class="star star2"></div>
+        <div class="star star3"></div>
+        <div class="star star4"></div>
+        <div class="star star5"></div>
+        <div class="med-icon">
+          <!-- Simple medical cross icon (SVG) -->
+          <svg width="38" height="38" viewBox="0 0 38 38">
+            <rect
+              x="16"
+              y="5"
+              width="6"
+              height="28"
+              rx="2"
+              fill="#FFD600"
+              stroke="#FF2D2D"
+              stroke-width="1.5"
+            ></rect>
+            <rect
+              x="5"
+              y="16"
+              width="28"
+              height="6"
+              rx="2"
+              fill="#FFD600"
+              stroke="#FF2D2D"
+              stroke-width="1.5"
+            ></rect>
+          </svg>
         </div>
-        <div id="admissionModalInner">
-          <label for="phone">Phone Number 📱</label>
-          <input type="text" id="phone" placeholder="e.g. 0700000000" maxlength="10" inputmode="numeric" autocomplete="tel" />
-
-          <label>Full Name 🧑</label>
-          <div class="name-fields">
-            <input type="text" id="firstName" placeholder="First" maxlength="30" autocomplete="given-name" />
-            <input type="text" id="middleName" placeholder="Middle" maxlength="30" autocomplete="additional-name" />
-            <input type="text" id="surname" placeholder="Surname" maxlength="30" autocomplete="family-name" />
-          </div>
-
-          <label for="gender">Gender ⚧️</label>
-          <select id="gender">
-            <option value="" disabled selected>Choose gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-          </select>
-
-          <label for="birthYear">Year of Birth 🎂</label>
-          <select id="birthYear">
-            <option value="" disabled selected>Choose year</option>
-            ${generateYearOptions(1950, 2025)}
-          </select>
-
-          <label for="secretPin">Personal code🔒</label>
-          <input type="password" id="secretPin" placeholder="4-digit Code" maxlength="4" inputmode="numeric" autocomplete="new-password" />
-
-          <div class="error-message" id="errorMessage"></div>
-          <button id="continueBtn" type="submit">Continue</button>
-        </div>
-        <div class="powered-by">Master with<span> MED-A ❤️</span></div>
-      </form>
+      </div>
+      <div class="pulse"></div>
+      <div class="typing-container" id="typingText"></div>
     </div>
-  `;
-  document.body.appendChild(modal);
+    <!-- Chat UI After Loader -->
+    <div class="chat-card">
+      <h1>You're Connected!</h1>
+      <p>Our friendly support team is here to help. Ask anything 😎</p>
+    </div>
+    <!-- JivoChat Integration -->
+    <script>
+      let typingDone = false;
+      let chatOpened = false;
+      let fullText = "Connecting to Support...";
+      let typingText = document.getElementById("typingText");
+      let index = 0;
 
-  // Force uppercase for name fields as user types
-  ["firstName", "middleName", "surname"].forEach(function(id) {
-    var input = modal.querySelector("#" + id);
-    input.addEventListener("input", function(e) {
-      // Only allow letters, force uppercase
-      let value = e.target.value.replace(/[^a-zA-Z]/g, "");
-      e.target.value = value.toUpperCase();
-    });
-  });
+      function typeWriter() {
+        if (index < fullText.length) {
+          typingText.innerHTML += fullText.charAt(index);
+          index++;
+          setTimeout(typeWriter, 100);
+        } else {
+          typingDone = true;
+          tryHideLoader();
+        }
+      }
+      typeWriter();
 
-  // Validation helpers
-  function isValidPhone(phone) {
-    return /^\d{10}$/.test(phone);
-  }
-  function isValidName(name) {
-    return /^[A-Z]+$/.test(name); // Now only uppercase allowed
-  }
-  function isValidPin(pin) {
-    return /^\d{4}$/.test(pin);
-  }
-  function showError(msg) {
-    const errorMessage = modal.querySelector("#errorMessage");
-    errorMessage.textContent = msg;
-    errorMessage.style.display = "block";
-  }
-  function hideError() {
-    const errorMessage = modal.querySelector("#errorMessage");
-    errorMessage.style.display = "none";
-  }
+      window.jivo_onLoadCallback = function () {
+        jivo_api.open();
+      };
+      window.jivo_onOpen = function () {
+        chatOpened = true;
+        tryHideLoader();
+      };
+      window.jivo_onClose = function () {
+        location.reload();
+      };
+      function tryHideLoader() {
+        if (typingDone && chatOpened) {
+          const loader = document.getElementById("loader");
+          loader.classList.add("fade-out");
+          setTimeout(() => {
+            loader.remove();
+            document.querySelector(".chat-card").style.display = "block";
+          }, 600);
+        }
+      }
+    </script>
+    <script src="//code.jivosite.com/widget/aFEvlRanyJ" async></script>
 
-  // Form handler
-  modal.querySelector("#admissionModal").addEventListener("submit", function() {
-    hideError();
-    const phone = modal.querySelector("#phone").value.trim();
-    const firstName = modal.querySelector("#firstName").value.trim();
-    const middleName = modal.querySelector("#middleName").value.trim();
-    const surname = modal.querySelector("#surname").value.trim();
-    const gender = modal.querySelector("#gender").value;
-    const birthYear = modal.querySelector("#birthYear").value;
-    const secretPin = modal.querySelector("#secretPin").value.trim();
+    <style>
+      * {
+        -webkit-tap-highlight-color: transparent; /* Removes tap highlight effect on touch */
+        -webkit-user-select: none; /* Prevents text/image selection */
+        user-select: none;
+      }
 
-    if (!isValidPhone(phone)) {
-      showError("Phone number must be exactly 10 digits.");
-      return;
-    }
-    if (!firstName || !middleName || !surname) {
-      showError("Please enter your full name (first, middle, surname).");
-      return;
-    }
-    if (!isValidName(firstName) || !isValidName(middleName) || !isValidName(surname)) {
-      showError("Names must contain only letters (A-Z).");
-      return;
-    }
-    if (!gender) {
-      showError("Please select your gender.");
-      return;
-    }
-    if (!birthYear) {
-      showError("Please select your year of birth.");
-      return;
-    }
-    if (!isValidPin(secretPin)) {
-      showError("Personal code must be exactly 4 digits.");
-      return;
-    }
-
-    // Combine fields into device_id string
-    const deviceId = phone + firstName + middleName + surname + gender + birthYear + secretPin;
-    localStorage.setItem("device_id", deviceId);
-
-    // Remove modal
-    modal.querySelector("#admissionModalOverlay").remove();
-  });
-})();
-</script>
-
-
-</body>
+      a,
+      button,
+      img {
+        outline: none; /* Removes any focus outline */
+      }
+    </style>
+  </body>
 </html>
-
